@@ -10,6 +10,7 @@ const isDev = !app.isPackaged;
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+console.log(__dirname);
 
 // The built directory structure
 //
@@ -46,19 +47,20 @@ let mainWindow: BrowserWindow | null = null;
 const preload = path.join(__dirname, '../preload/index.mjs');
 const indexHtml = path.join(RENDERER_DIST, 'index.html');
 
+const WINDOWS_WIDTH = 500;
 const createMainWindow = async () => {
     mainWindow = new BrowserWindow({
         title: 'Main window',
-        icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
-        width: 700,
+        icon: path.join(process.env.VITE_PUBLIC, '/my-dock.png'),
+        width: WINDOWS_WIDTH,
         useContentSize: true,
-        height: 100,
+        height: 50,
         frame: false,
         transparent: true,
         alwaysOnTop: true,
-        resizable: true,
-        movable: true,
+        resizable: false,
         skipTaskbar: true,
+        // type: 'dock',    // Cambia el tipo de ventana (prueba también con 'dock')
         webPreferences: {
             preload,
             // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -72,12 +74,12 @@ const createMainWindow = async () => {
 
     // Posicionar el overlay en la esquina inferior derecha de la pantalla
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-    mainWindow.setPosition(width - mainWindow.getBounds().width, 0);
+    mainWindow.setPosition(width * 0.5 - WINDOWS_WIDTH * 0.5, 0);
 
     if (VITE_DEV_SERVER_URL) { // #298
         mainWindow.loadURL(VITE_DEV_SERVER_URL);
         // Open devTool if the app is not packaged
-        mainWindow.webContents.openDevTools();
+        // mainWindow.webContents.openDevTools();
     } else {
         mainWindow.loadFile(indexHtml);
     }
@@ -87,7 +89,6 @@ const createMainWindow = async () => {
         if (url.startsWith('https:')) shell.openExternal(url);
         return { action: 'deny' };
     });
-    // win.webContents.on('will-navigate', (event, url) => { }) #344
 
 
     mainWindow.on('closed', () => app.quit());
@@ -96,7 +97,10 @@ const createMainWindow = async () => {
     if (!isDev) Menu.setApplicationMenu(null);
 };
 
-app.whenReady().then(createMainWindow);
+app.whenReady().then(() => {
+    createMainWindow();
+    console.log(process.platform, 'is ready!');
+});
 
 app.on('window-all-closed', () => {
     mainWindow = null;

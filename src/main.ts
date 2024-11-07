@@ -2,6 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import 'vuetify/styles'; // Importa los estilos de Vuetify
+import "./scss/generals.scss";
+import "./scss/variables.scss";
 import "./helpers/dom.helpers";
 import { RegisterGlobalComponents } from "./components/globals/global-components";
 

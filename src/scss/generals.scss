@@ -1,34 +1,25 @@
-:root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    --color1: #00c8ff;
-    --color2: #df01f8;
-    --progress-color: #00ffc6;
-    --background-dark: #052e44f0;
-    --shadow-size: 10px;
-    --offset: 5px;
-}
-
 * {
     box-sizing: border-box;
+    outline: none !important;
+    user-select: none;
+    -webkit-user-select: none; /* Safari y Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    user-select: none;
+}
+
+/* En el CSS global o en el archivo CSS principal */
+html {
+    overflow: hidden;
 }
 
 body {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
     margin: 0;
     display: flex;
     place-items: center;
-    min-width: 100vw;
-    height: 100vh;
     background: transparent;
     color: white;
     font-family: Arial, sans-serif;
@@ -37,7 +28,12 @@ body {
     align-items: start;
     justify-content: flex-end;
     position: relative;
-    padding: 20px;
+    overflow: hidden;
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
 }
 /* Configuración de scroll */
 ::-webkit-scrollbar {
@@ -51,20 +47,6 @@ a {
 }
 a:hover {
     color: #535bf2;
-}
-
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    cursor: pointer;
-    transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
 }
 
 .draggable {
@@ -97,6 +79,26 @@ button:hover {
             calc(var(--offset) * -1) calc(var(--offset) * -1) var(--shadow-size) var(--color1), var(--offset) var(--offset) var(--shadow-size) var(--color2);
     }
 }
+
+$size-pulse: 4px;
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 $size-pulse var(--color1), 0 0 $size-pulse var(--color1);
+    }
+    25% {
+        box-shadow: 0 0 $size-pulse var(--color2), 0 0 $size-pulse var(--color2);
+    }
+    50% {
+        box-shadow: 0 0 $size-pulse var(--color1), 0 0 $size-pulse var(--color1);
+    }
+    75% {
+        box-shadow: 0 0 $size-pulse var(--color2), 0 0 $size-pulse var(--color2);
+    }
+    100% {
+        box-shadow: 0 0 $size-pulse var(--color1), 0 0 $size-pulse var(--color1);
+    }
+}
+
 .flex-center {
     display: flex;
     align-items: center;
@@ -105,4 +107,7 @@ button:hover {
 
 .pointer {
     cursor: pointer;
+}
+.p-relative {
+    position: relative;
 }

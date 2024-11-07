@@ -76,14 +76,6 @@ export default defineConfig(({ command }) => {
                 '@': path.resolve(__dirname, 'src'), // Agrega el alias '@' para 'src'
             },
         },
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    // Opcional: define variables globales, mixins, etc.
-                    additionalData: `@use "@/style.scss" as *;`,
-                },
-            },
-        },
         clearScreen: false,
     };
 });
