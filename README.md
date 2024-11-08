@@ -1,6 +1,6 @@
 # 🚀 My Shortcuts App
 
-**My Shortcuts App** is built using ![Electron Icon](https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/electron.svg) **Electron**, ![Vue Icon](https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/vue.svg) **Vue**, and ![TypeScript Icon](path/to/typescript-icon.png) **TypeScript** to deliver a smooth and powerful experience. It’s designed to boost productivity by providing quick access to frequently used projects, applications, and links. This app adds a floating dock-like bar above the taskbar, allowing users to create custom buttons for their favorite shortcuts.
+**My Shortcuts App** is built using <img src="https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/electron.svg" width="20" height="20"> **Electron**, ![Vue Icon](https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/vue.svg) **Vue**, and ![TypeScript Icon](path/to/typescript-icon.png) **TypeScript** to deliver a smooth and powerful experience. It’s designed to boost productivity by providing quick access to frequently used projects, applications, and links. This app adds a floating dock-like bar above the taskbar, allowing users to create custom buttons for their favorite shortcuts.
 
 ### ✨ Features
 
