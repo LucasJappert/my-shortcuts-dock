@@ -5,7 +5,7 @@
                 <span v-if="shortcut?.title">
                     {{ shortcut.title }}
                 </span>
-                <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut.iconPath" :alt="shortcut.iconPath" />
+                <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut?.iconPath" :alt="shortcut?.iconPath" />
             </my-button>
 
             <!-- <link-button v-if="shortcut?.linkWeb" :link-web="shortcut.linkWeb" :classes="shortcut.classes">
@@ -25,7 +25,7 @@ export default defineComponent({
     name: "Shortcuts",
     props: {
         items: {
-            type: Array as () => IShortCut[],
+            type: Array<IShortCut | null>,
             default: () => [],
         },
     },
