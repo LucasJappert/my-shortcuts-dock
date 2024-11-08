@@ -3,7 +3,7 @@ import path from 'node:path';
 import { VITE_DEV_SERVER_URL } from './paths';
 
 
-const WINDOWS_WIDTH = 900;
+const WINDOWS_WIDTH = 600;
 const WINDOWS_HEIGHT = 60;
 const OVERLAY_WIDTH = 2560;
 
