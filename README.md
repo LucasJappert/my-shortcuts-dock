@@ -2,6 +2,12 @@
 
 **My Shortcuts App** is built using <img src="https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/electron.svg" width="20" height="20"> **Electron**, <img src="https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/f542734c91430e751ac2b568ec7982459e9ce2b1/src/assets/vite.svg" width="20" height="20"> **Vite**, <img src="https://raw.githubusercontent.com/LucasJappert/my-shortcuts-dock/68506a05f3b18a84beed7b0c18d5911b8d3015c9/src/assets/vue.svg" width="20" height="20"> **Vue**, <img src="https://github.com/LucasJappert/lucasjappert/blob/main/images/ts.png" width="20" height="20"> **TypeScript**  to deliver a smooth and powerful experience. It’s designed to boost productivity by providing quick access to frequently used projects, applications, and links. This app adds a floating dock-like bar above the taskbar, allowing users to create custom buttons for their favorite shortcuts.
 
+### 📸 Screenshot
+
+Here’s a preview of how **My Shortcuts App** looks in action:
+
+![My Shortcuts App](public/screenshot.png)
+
 ### ✨ Features
 
 - Floating dock bar for quick and convenient access.
