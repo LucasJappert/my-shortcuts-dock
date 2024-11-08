@@ -1,7 +1,7 @@
 import { ipcRenderer, contextBridge } from 'electron';
 
-// --------- Expose some API to the Renderer process ---------
-contextBridge.exposeInMainWorld('electronAPI', {
+// --------- Define the electronAPI to expose to the Renderer process ---------
+const electronAPI = {
     on(...args: Parameters<typeof ipcRenderer.on>) {
         const [channel, listener] = args;
         return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args));
@@ -19,14 +19,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
         return ipcRenderer.invoke(channel, ...omit);
     },
 
-    // You can expose other APTs you need here.
-    // ...
-
-    openFolder: (folderPath: string) => ipcRenderer.send('open-folder', folderPath),
+    // Custom API methods for specific actions
+    openFolderInVSCode: (folderPath: string) => ipcRenderer.send('open-folder-in-vscode', folderPath),
     closeButton: () => ipcRenderer.send('close-button'),
-});
+    resizeWindow: (width: number, height: number) => ipcRenderer.send('resize-window', width, height),
 
-// --------- Preload scripts loading ---------
+    // Additional methods can be added here
+};
+
+// Expose the electronAPI to the renderer process
+contextBridge.exposeInMainWorld('electronAPI', electronAPI);
+
+// --------- DOM Ready Helper ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
     return new Promise((resolve) => {
         if (condition.includes(document.readyState)) {
@@ -41,25 +45,21 @@ function domReady(condition: DocumentReadyState[] = ['complete', 'interactive'])
     });
 }
 
+// --------- Safe DOM Manipulation ---------
 const safeDOM = {
     append(parent: HTMLElement, child: HTMLElement) {
-        if (!Array.from(parent.children).find(e => e === child)) {
+        if (!Array.from(parent.children).includes(child)) {
             return parent.appendChild(child);
         }
     },
     remove(parent: HTMLElement, child: HTMLElement) {
-        if (Array.from(parent.children).find(e => e === child)) {
+        if (Array.from(parent.children).includes(child)) {
             return parent.removeChild(child);
         }
     },
 };
 
-/**
- * https://tobiasahlin.com/spinkit
- * https://connoratherton.com/loaders
- * https://projects.lukehaas.me/css-loaders
- * https://matejkustec.github.io/SpinThatShit
- */
+// --------- Loading Screen Functions ---------
 function useLoading() {
     const className = `loaders-css__square-spin`;
     const styleContent = `
@@ -109,13 +109,12 @@ function useLoading() {
     };
 }
 
-// ----------------------------------------------------------------------
-
+// --------- Loading Screen Control ---------
 const { appendLoading, removeLoading } = useLoading();
 domReady().then(appendLoading);
 
 window.onmessage = (ev) => {
-    ev.data.payload === 'removeLoading' && removeLoading();
+    if (ev.data.payload === 'removeLoading') removeLoading();
 };
 
 setTimeout(removeLoading, 4999);

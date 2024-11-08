@@ -1,35 +1,35 @@
 {
-  "workbench.colorCustomizations": { //Styles used for front projects
-      "activityBar.activeBackground": "#b700ff",
-      "activityBar.activeBorder": "#000000",
-      "activityBar.background": "#b700ff",
-      "activityBar.foreground": "#000000",
-      "activityBar.inactiveForeground": "#000000",
-      "activityBarBadge.background": "#000000",
-      "activityBarBadge.foreground": "#ffffff",
-      "statusBar.background": "#b700ff",
-      "statusBar.foreground": "#000000",
-      "statusBarItem.hoverBackground": "#b700ff",
-      "titleBar.activeBackground": "#b700ff",
-      "titleBar.activeForeground": "#000000",
-      "titleBar.inactiveBackground": "#7600a5",
-      "titleBar.inactiveForeground": "#000000"
-  },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "[vue]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.wordWrap": "on",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.tsc.autoDetect": "off",
-  "json.schemas": [
-      {
-          "fileMatch": [
-              "/*electron-builder.json5",
-              "/*electron-builder.json"
-          ],
-          "url": "https://json.schemastore.org/electron-builder"
-      }
-  ]
+    "workbench.colorCustomizations": { //Styles used for front projects
+        "activityBar.activeBackground": "#b700ff",
+        "activityBar.activeBorder": "#000000",
+        "activityBar.background": "#b700ff",
+        "activityBar.foreground": "#000000",
+        "activityBar.inactiveForeground": "#000000",
+        "activityBarBadge.background": "#000000",
+        "activityBarBadge.foreground": "#ffffff",
+        "statusBar.background": "#b700ff",
+        "statusBar.foreground": "#000000",
+        "statusBarItem.hoverBackground": "#b700ff",
+        "titleBar.activeBackground": "#b700ff",
+        "titleBar.activeForeground": "#000000",
+        "titleBar.inactiveBackground": "#7600a5",
+        "titleBar.inactiveForeground": "#000000"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.wordWrap": "on",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.tsc.autoDetect": "off",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/*electron-builder.json5",
+                "/*electron-builder.json"
+            ],
+            "url": "https://json.schemastore.org/electron-builder"
+        }
+    ]
 }

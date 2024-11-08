@@ -1,59 +1,48 @@
 <template>
-    <div class="shorcuts-container">
-        <my-button folder-path="/home/lucas/Desktop/my-projects/maizplus-ambientaciones-api" :classes="['pulse-yellow']">
-            <!-- <div class="circle bg-yellow mr-2"></div> -->
-            🌽
-        </my-button>
-        <my-button folder-path="/home/lucas/Desktop/my-projects/maizplus-api" :classes="['pulse-aqua']">
-            <!-- <div class="circle bg-aqua mr-2"></div> -->
-            🌽
-        </my-button>
-        <my-button folder-path="/home/lucas/Desktop/my-projects/maizplus-front" :classes="['pulse-green']">
-            <!-- <div class="circle bg-green mr-2"></div> -->
-            🌽
-        </my-button>
+    <div class="my-container">
+        <template v-for="(shortcut, index) in items" :key="index">
+            <my-button v-if="shortcut" :shortCut="shortcut" :classes="shortcut?.classes">
+                <span v-if="shortcut?.title">
+                    {{ shortcut.title }}
+                </span>
+                <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut.iconPath" :alt="shortcut.iconPath" />
+            </my-button>
 
-        <div class="mx-1">|</div>
+            <!-- <link-button v-if="shortcut?.linkWeb" :link-web="shortcut.linkWeb" :classes="shortcut.classes">
+                {{ shortcut.title }}
+            </link-button> -->
 
-        <my-button folder-path="/home/lucas/Desktop/my-projects/agroideas-in-api" :classes="['pulse-aqua']">
-            <!-- <div class="circle bg-aqua mr-2"></div> -->
-            💰
-        </my-button>
-        <my-button folder-path="/home/lucas/Desktop/my-projects/agroideas-in-front" :classes="['pulse-green']">
-            <!-- <div class="circle bg-green mr-2"></div> -->
-            💰
-        </my-button>
-
-        <div class="mx-1">|</div>
-
-        <my-button folder-path="/home/lucas/Desktop/my-projects/my-shortcuts-app" :classes="['pulse-purple']">
-            <!-- <div class="circle bg-purple mr-2"></div> -->
-            ⚛️
-        </my-button>
-        <my-button folder-path="/home/lucas/Desktop/my-projects/twitch-extensions" :classes="['pulse-aqua']">
-            <!-- <div class="circle bg-aqua mr-2"></div> -->
-            🧩
-        </my-button>
+            <div v-if="shortcut == null" class="mx-1">|</div>
+        </template>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { IShortCut } from "./models/ShortCut.model";
 
 export default defineComponent({
     name: "Shortcuts",
+    props: {
+        items: {
+            type: Array as () => IShortCut[],
+            default: () => [],
+        },
+    },
 });
 </script>
 
 <style scoped lang="scss">
-.shorcuts-container {
+.my-container {
     display: flex;
     align-items: center;
     justify-content: start;
     // padding: 10px;
     border-radius: 15px;
-    width: 100%;
-    overflow-x: scroll;
+
+    &.one-row {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 .circle {
     border-radius: 50%;
@@ -97,6 +86,23 @@ $size-pulse: 3px;
 }
 .pulse-aqua {
     @include pulse-animation(aqua);
+}
+.pulse-red {
+    @include pulse-animation(red);
+}
+.pulse-white {
+    @include pulse-animation(white);
+}
+.pulse-magenta {
+    @include pulse-animation(magenta);
+}
+.pulse-steelblue {
+    @include pulse-animation(steelblue);
+}
+.icon-image {
+    height: 90%;
+    max-height: 100%;
+    max-width: 30px;
 }
 </style>
 

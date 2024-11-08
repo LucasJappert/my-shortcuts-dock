@@ -7,8 +7,9 @@ interface Window {
 }
 
 export interface ElectronAPI {
-    openFolder: (folderPath: string) => void;
+    openFolderInVSCode: (folderPath: string) => void;
     closeButton: () => void;
+    resizeWindow: (width: number, height: number) => void;
 }
 
 declare global {

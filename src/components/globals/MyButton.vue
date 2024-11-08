@@ -1,8 +1,6 @@
 <template>
-    <div class="flex-center mx-1 pointer" :class="getClasses" @click="openFolder()" :title="folderPath">
-        <span>
-            <slot></slot>
-        </span>
+    <div class="flex-center mx-1 pointer my-button" :class="getClasses" @click="ClickButton()" :title="getTitle">
+        <slot></slot>
     </div>
 </template>
 
@@ -16,42 +14,55 @@ export default defineComponent({
             type: Array<string>,
             default: () => [],
         },
-        folderPath: {
-            type: String,
-            default: "",
+        shortCut: {
+            type: Object,
+            default: null,
         },
     },
     computed: {
         getClasses(): string {
             return this.classes.join(" ");
         },
+        getTitle(): string {
+            if (this.shortCut?.folderPath) return this.shortCut.folderPath;
+            if (this.shortCut?.linkWeb) return this.shortCut.linkWeb;
+
+            return "";
+        },
     },
     setup(props) {
-        const openFolder = () => {
-            // Usa el método expuesto en electronAPI para abrir la carpeta
-            window.electronAPI.openFolder(props.folderPath);
+        const ClickButton = () => {
+            console.log(props.shortCut);
+            if (props.shortCut?.action) return props.shortCut.action();
+
+            // if (props.folderPath) return window.electronAPI.openFolderInVSCode(props.folderPath);
+
+            // if (props.webLink) return window.open(props.webLink, "_blank");
+
+            // return null;
         };
 
         return {
-            openFolder,
+            ClickButton,
         };
     },
 });
 </script>
 
 <style scoped lang="scss">
-div {
+.my-button {
     border-radius: 20px;
     background: #000000d0;
     padding: 5px 10px;
+    height: 100%;
+    min-width: 50px;
+    max-width: 50px;
+    display: inline-flex;
     cursor: pointer;
     // animation: pulse 4s infinite linear;
 
     &:hover {
         background: #000000;
-    }
-    span {
-        // filter: grayscale(100%);
     }
 }
 </style>
