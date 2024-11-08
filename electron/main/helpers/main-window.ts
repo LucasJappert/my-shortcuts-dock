@@ -12,7 +12,7 @@ export let MAIN_WINDOW: BrowserWindow | null = null;
 export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtml: string) => {
     MAIN_WINDOW = new BrowserWindow({
         title: 'Main window',
-        icon: path.join(process.env.VITE_PUBLIC, '/my-dock.png'),
+        icon: path.join(process.env.VITE_PUBLIC, '/shortcuts.png'),
         width: WINDOWS_WIDTH,
         useContentSize: true,
         height: WINDOWS_HEIGHT,

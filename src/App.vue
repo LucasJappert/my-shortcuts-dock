@@ -92,7 +92,7 @@ const SecondShortCuts = () => {
         iconPath: new URL("@/assets/whatsapp.png", import.meta.url).href,
         linkWeb: "https://web.whatsapp.com/",
         action: () => {
-            window.open("https://speedy-notes.netlify.app/", "_blank");
+            window.open("https://web.whatsapp.com/", "_blank");
         },
     });
 
@@ -100,7 +100,7 @@ const SecondShortCuts = () => {
     items.push({
         classes: ["pulse-red"],
         iconPath: new URL("@/assets/gmail.svg", import.meta.url).href,
-        linkWeb: "https://web.whatsapp.com/",
+        linkWeb: "https://mail.google.com/mail/u/0/#inbox",
         action: () => {
             window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
         },
