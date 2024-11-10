@@ -14,7 +14,7 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
     MAIN_WINDOW = new BrowserWindow({
         title: 'Main window',
         icon: path.join(process.env.VITE_PUBLIC, '/shortcuts.png'),
-        width: WINDOW_WIDTH,
+        width: WINDOW_WIDTH_FULL,
         useContentSize: true,
         height: WINDOW_HEIGHT,
         frame: false,

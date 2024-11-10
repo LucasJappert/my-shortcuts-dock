@@ -53,7 +53,7 @@ export default defineComponent({
 .my-button {
     border-radius: 20px;
     background: rgba(0, 0, 0, 0.8156862745);
-    padding: 5px;
+    // padding: 5px;
     height: 30px;
     max-height: 90%;
     min-width: 30px;

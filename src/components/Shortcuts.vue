@@ -102,7 +102,7 @@ $size-pulse: 3px;
 .icon-image {
     height: 100%;
     max-height: 100%;
-    max-width: 40px;
+    max-width: 30px;
     border-radius: 100%;
 }
 </style>
