@@ -1,9 +1,8 @@
 // @see https://www.electron.build/configuration/configuration
 {
     $schema: "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-    appId: "my-shortcuts-dock",
+    appId: "${npm_package_buildProductName}",
     asar: true,
-    productName: "my-shortcuts-dock",
     directories: {
         output: "release/${version}",
     },
