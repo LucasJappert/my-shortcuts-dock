@@ -2,6 +2,7 @@
 import { createVuetify } from 'vuetify';
 import * as directives from 'vuetify/directives';
 import * as components from 'vuetify/components';
+import '@mdi/font/css/materialdesignicons.css'; // Asegúrate de que esta línea esté incluida
 
 const theme = {
     themes: {
@@ -36,5 +37,8 @@ export default createVuetify({
     theme: {
         defaultTheme: 'dark', // Establecer el tema predeterminado
         themes: theme.themes,
+    },
+    icons: {
+        defaultSet: 'mdi', // Asegúrate de que "mdi" esté configurado como el set predeterminado
     },
 });

@@ -3,9 +3,16 @@ import { ipcRenderer } from "electron";
 import { IShortCut } from "./components/models/ShortCut.model";
 import Shortcuts from "./components/Shortcuts.vue";
 import whatsappIcon from "@/assets/whatsapp.png";
+import { ref } from "vue";
+
+const expanded = ref(false);
 
 const closeButton = () => {
     window.electronAPI.closeButton();
+};
+const ChangeSizeButton = () => {
+    expanded.value = !expanded.value;
+    window.electronAPI.resizeWindow();
 };
 
 const FirstShortCuts = () => {
@@ -14,7 +21,7 @@ const FirstShortCuts = () => {
     items.push({
         folderPath: "/home/lucas/Desktop/my-projects/maizplus-ambientaciones-api",
         classes: ["pulse-yellow"],
-        iconPath: new URL("@/assets/farm.svg", import.meta.url).href,
+        iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
         action: () => {
             window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus-ambientaciones-api");
         },
@@ -22,7 +29,7 @@ const FirstShortCuts = () => {
     items.push({
         folderPath: "/home/lucas/Desktop/my-projects/maizplus-api",
         classes: ["pulse-blue"],
-        iconPath: new URL("@/assets/farm.svg", import.meta.url).href,
+        iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
         action: () => {
             window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus-api");
         },
@@ -55,7 +62,7 @@ const FirstShortCuts = () => {
     items.push(null);
     items.push({
         folderPath: "/home/lucas/Desktop/my-projects/my-shortcuts-app",
-        classes: ["pulse-purple"],
+        classes: ["pulse-magenta"],
         iconPath: new URL("@/assets/shortcuts.svg", import.meta.url).href,
         action: () => {
             window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/my-shortcuts-app");
@@ -132,7 +139,7 @@ const SecondShortCuts = () => {
         },
     });
     items.push({
-        classes: ["pulse-blue"],
+        classes: ["pulse-aqua"],
         iconPath: new URL("@/assets/pull-request.svg", import.meta.url).href,
         linkWeb: "https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-api/pullrequests?_a=mine",
         action: () => {
@@ -159,11 +166,17 @@ const SecondShortCuts = () => {
     </div>
 
     <div class="btn-container">
-        <div class="btn move-btn draggable p-relative" @click="closeButton">
-            <!-- <span class="rotate-90">↔</span> -->
-            <span class="p-relative">↔</span>
-        </div>
-        <div class="btn close-btn ml-2" @click="closeButton">✖</div>
+        <v-btn
+            class=""
+            density="compact"
+            :icon="expanded ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
+            size="medium"
+            @click="ChangeSizeButton()"
+        ></v-btn>
+
+        <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn>
+
+        <v-btn class="ml-2" density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
     </div>
 </template>
 
@@ -182,50 +195,41 @@ const SecondShortCuts = () => {
 }
 </style>
 <style scoped lang="scss">
-.btn-container {
-    position: relative !important;
-    // top: 50%;
-    // right: -50px;
-    // transform: translateY(-50%);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    padding-left: 10px;
-}
-.btn {
-    font-size: 1.1rem;
-    // line-height: 1.2rem;
-    // margin: 0 2px;
-    background: #00000090;
-    color: var(--white) !important;
-    padding: 5px 10px;
-    border-radius: 100%;
-    box-shadow: 0 0 5px #ffffff;
-    // animation: pulse 10s infinite linear;
-}
-.rotate-90 {
-    transform: rotate(90deg) translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    width: 0%;
-    height: 0%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.move-btn {
-    cursor: move !important;
-}
 .shortcuts-container {
     background: #000000c0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     overflow-x: scroll;
-    box-shadow: 0 0 10px #ffffff88;
+    box-shadow: inset 0 0 5px #ffffff88;
     border-radius: 30px;
+    padding: 2px;
+}
+.btn-container {
+    position: relative !important;
+    background: #000000c0;
+    box-shadow: inset 0 0 5px #ffffff50;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    height: 90%;
+    padding: 0 10px;
+}
+.btn {
+    font-size: 0.9rem;
+    line-height: 2rem;
+    background: #00000090;
+    // color: var(--white) !important;
     padding: 5px;
+    border-radius: 100%;
+    box-shadow: inset 0 0 5px #ffffff;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
 }
 </style>

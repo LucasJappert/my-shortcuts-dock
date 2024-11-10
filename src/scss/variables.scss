@@ -57,3 +57,35 @@
 .bg-aqua {
     background-color: aqua;
 }
+
+.c-red {
+    color: var(--red) !important;
+}
+.c-green {
+    color: var(--green) !important;
+}
+.c-blue {
+    color: var(--blue) !important;
+}
+.c-yellow {
+    color: var(--yellow) !important;
+}
+.c-purple {
+    color: var(--purple) !important;
+}
+.c-orange {
+    color: var(--orange) !important;
+}
+.c-skyblue {
+    color: var(--skyblue) !important;
+}
+.c-purple2 {
+    color: var(--purple2) !important;
+}
+.c-aqua {
+    color: aqua;
+}
+
+.b-shadow-red {
+    box-shadow: inset 0 0 10px var(--red) !important;
+}

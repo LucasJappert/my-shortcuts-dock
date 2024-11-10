@@ -53,8 +53,8 @@ export default defineComponent({
 $size-pulse: 3px;
 // Mixin para crear animación de pulso con color variable
 @mixin pulse-animation($color) {
-    animation: pulse-#{"#{$color}"} 3s infinite linear;
-    border: 1px solid rgba($color, 0.9);
+    // animation: pulse-#{"#{$color}"} 3s infinite linear;
+    border: 2px solid rgba($color, 0.9);
 
     @keyframes pulse-#{"#{$color}"} {
         0% {
@@ -74,7 +74,7 @@ $size-pulse: 3px;
 }
 
 .pulse-blue {
-    @include pulse-animation(blue);
+    @include pulse-animation(deepSkyBlue);
 }
 
 .pulse-green {
@@ -82,7 +82,7 @@ $size-pulse: 3px;
 }
 
 .pulse-purple {
-    @include pulse-animation(purple);
+    @include pulse-animation(blueViolet);
 }
 .pulse-aqua {
     @include pulse-animation(aqua);
@@ -100,9 +100,10 @@ $size-pulse: 3px;
     @include pulse-animation(steelblue);
 }
 .icon-image {
-    height: 90%;
+    height: 100%;
     max-height: 100%;
-    max-width: 30px;
+    max-width: 40px;
+    border-radius: 100%;
 }
 </style>
 

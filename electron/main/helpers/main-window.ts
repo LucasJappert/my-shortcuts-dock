@@ -3,8 +3,9 @@ import path from 'node:path';
 import { VITE_DEV_SERVER_URL } from './paths';
 
 
-const WINDOWS_WIDTH = 600;
-const WINDOWS_HEIGHT = 60;
+const WINDOW_WIDTH = 400;
+const WINDOW_WIDTH_FULL = 800;
+const WINDOW_HEIGHT = 40;
 const OVERLAY_WIDTH = 2560;
 
 export let MAIN_WINDOW: BrowserWindow | null = null;
@@ -13,19 +14,18 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
     MAIN_WINDOW = new BrowserWindow({
         title: 'Main window',
         icon: path.join(process.env.VITE_PUBLIC, '/shortcuts.png'),
-        width: WINDOWS_WIDTH,
+        width: WINDOW_WIDTH,
         useContentSize: true,
-        height: WINDOWS_HEIGHT,
+        height: WINDOW_HEIGHT,
         frame: false,
         transparent: true,
         alwaysOnTop: true,
-        resizable: false,
+        resizable: true,
         skipTaskbar: true,
         webPreferences: { preload },
     });
 
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-    MAIN_WINDOW.setPosition(OVERLAY_WIDTH * 0.5 - WINDOWS_WIDTH - 300, height - WINDOWS_HEIGHT - 30);
+    _ReLocateWindow();
 
     if (VITE_DEV_SERVER_URL) {
         MAIN_WINDOW.loadURL(VITE_DEV_SERVER_URL);
@@ -42,4 +42,17 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
     MAIN_WINDOW.on('closed', () => MAIN_WINDOW = null);
 
     if (!isDev) Menu.setApplicationMenu(null);
+};
+
+export const ResizeWindow = () => {
+    const currentWidth = MAIN_WINDOW?.getSize()[0] || WINDOW_WIDTH_FULL;
+    const newWidth = currentWidth >= WINDOW_WIDTH_FULL ? WINDOW_WIDTH : WINDOW_WIDTH_FULL;
+    MAIN_WINDOW?.setSize(newWidth, WINDOW_HEIGHT, true);
+    _ReLocateWindow();
+};
+
+const _ReLocateWindow = () => {
+    const currentWidth = MAIN_WINDOW?.getSize()[0] || WINDOW_WIDTH_FULL;
+    const { width: monitorWidth, height: monitorHeight } = screen.getPrimaryDisplay().workAreaSize;
+    MAIN_WINDOW?.setPosition(monitorWidth * 0.5 - currentWidth * 0.5, monitorHeight - WINDOW_HEIGHT, true);
 };

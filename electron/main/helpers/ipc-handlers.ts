@@ -1,7 +1,7 @@
 // ipcHandlers.ts
 import { ipcMain, BrowserWindow } from 'electron';
 import { exec } from 'child_process';
-import { MAIN_WINDOW } from './main-window';
+import { MAIN_WINDOW, ResizeWindow } from './main-window';
 import { VITE_DEV_SERVER_URL } from './paths';
 
 export const SetupIpcHandlers = (preload: string, indexHtml: string) => {
@@ -32,7 +32,7 @@ export const SetupIpcHandlers = (preload: string, indexHtml: string) => {
         MAIN_WINDOW?.close();
     });
 
-    ipcMain.on('resize-window', (event, width: number, height: number) => {
-        MAIN_WINDOW?.setSize(width || 500, height || 50, true);
+    ipcMain.on('resize-window', (event) => {
+        ResizeWindow();
     });
 };

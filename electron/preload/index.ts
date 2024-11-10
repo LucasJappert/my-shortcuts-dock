@@ -22,8 +22,7 @@ const electronAPI = {
     // Custom API methods for specific actions
     openFolderInVSCode: (folderPath: string) => ipcRenderer.send('open-folder-in-vscode', folderPath),
     closeButton: () => ipcRenderer.send('close-button'),
-    resizeWindow: (width: number, height: number) => ipcRenderer.send('resize-window', width, height),
-
+    resizeWindow: (width: number, height: number) => ipcRenderer.send('resize-window'),
     // Additional methods can be added here
 };
 
