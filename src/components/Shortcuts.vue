@@ -93,6 +93,9 @@ $size-pulse: 3px;
 .pulse-white {
     @include pulse-animation(white);
 }
+.pulse-black {
+    @include pulse-animation(black);
+}
 .pulse-magenta {
     @include pulse-animation(magenta);
 }

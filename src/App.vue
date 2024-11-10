@@ -87,7 +87,7 @@ const SecondShortCuts = () => {
     items.push(null);
 
     items.push({
-        classes: ["pulse-green"],
+        classes: ["pulse-black"],
         iconPath: new URL("@/assets/notepad.svg", import.meta.url).href,
         linkWeb: "https://speedy-notes.netlify.app/",
         action: () => {
@@ -95,7 +95,15 @@ const SecondShortCuts = () => {
         },
     });
     items.push({
-        classes: ["pulse-green"],
+        classes: ["pulse-black"],
+        iconPath: new URL("@/assets/icons/chatgpt.jpg", import.meta.url).href,
+        linkWeb: "https://chatgpt.com/",
+        action: () => {
+            window.open("https://chatgpt.com/", "_blank");
+        },
+    });
+    items.push({
+        classes: ["pulse-black"],
         iconPath: new URL("@/assets/whatsapp.png", import.meta.url).href,
         linkWeb: "https://web.whatsapp.com/",
         action: () => {
