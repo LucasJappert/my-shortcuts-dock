@@ -1,6 +1,6 @@
 // ipcHandlers.ts
 import { ipcMain, BrowserWindow } from 'electron';
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 import { MAIN_WINDOW, ResizeWindow } from './main-window';
 import { VITE_DEV_SERVER_URL } from './paths';
 
@@ -19,13 +19,11 @@ export const SetupIpcHandlers = (preload: string, indexHtml: string) => {
     });
 
     ipcMain.on('open-folder-in-vscode', (event, folderPath: string) => {
-        // openFolderInVSCode
-        const command = `code ${folderPath}`;
-        exec(command, (error) => {
-            if (error) {
-                console.error('Error al abrir la carpeta:', error);
-            }
-        });
+        // Execute the AppImage in detached mode
+        const proceso = spawn('code', [folderPath], { detached: true, stdio: 'ignore' });
+
+        // Disasociate the process so it doesn't depend on Electron
+        proceso.unref();
     });
 
     ipcMain.on("close-button", () => {
@@ -34,5 +32,13 @@ export const SetupIpcHandlers = (preload: string, indexHtml: string) => {
 
     ipcMain.on('resize-window', (event) => {
         ResizeWindow();
+    });
+
+    ipcMain.on('open-app-image', (event, filePath: string) => {
+        // Execute the AppImage in detached mode
+        const proceso = spawn(filePath, { detached: true, stdio: 'ignore' });
+
+        // Disasociate the process so it doesn't depend on Electron
+        proceso.unref();
     });
 };

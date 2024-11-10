@@ -104,6 +104,13 @@ const SecondShortCuts = () => {
     });
     items.push({
         classes: ["pulse-black"],
+        iconPath: new URL("@/assets/icons/youtube-music.jpg", import.meta.url).href,
+        action: () => {
+            window.electronAPI.openAppImage("/home/lucas/Desktop/my-youtube-music.AppImage");
+        },
+    });
+    items.push({
+        classes: ["pulse-black"],
         iconPath: new URL("@/assets/whatsapp.png", import.meta.url).href,
         linkWeb: "https://web.whatsapp.com/",
         action: () => {

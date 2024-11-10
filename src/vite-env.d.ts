@@ -10,6 +10,7 @@ export interface ElectronAPI {
     openFolderInVSCode: (folderPath: string) => void;
     closeButton: () => void;
     resizeWindow: () => void;
+    openAppImage: (filePath: string) => void;
 }
 
 declare global {
