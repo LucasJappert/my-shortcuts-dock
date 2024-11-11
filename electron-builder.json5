@@ -28,6 +28,7 @@
     },
     linux: {
         target: ["AppImage"],
+        icon: "public/shortcuts.png",
         artifactName: "${productName}.${ext}",
     },
 }

@@ -29,7 +29,7 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
 
     if (VITE_DEV_SERVER_URL) {
         MAIN_WINDOW.loadURL(VITE_DEV_SERVER_URL);
-        if (isDev) MAIN_WINDOW.webContents.openDevTools();
+        // if (isDev) MAIN_WINDOW.webContents.openDevTools();
     } else {
         MAIN_WINDOW.loadFile(indexHtml);
     }
@@ -54,5 +54,5 @@ export const ResizeWindow = () => {
 const _ReLocateWindow = () => {
     const currentWidth = MAIN_WINDOW?.getSize()[0] || WINDOW_WIDTH_FULL;
     const { width: monitorWidth, height: monitorHeight } = screen.getPrimaryDisplay().workAreaSize;
-    MAIN_WINDOW?.setPosition(monitorWidth * 0.5 - currentWidth * 0.5, monitorHeight - WINDOW_HEIGHT, true);
+    MAIN_WINDOW?.setPosition(monitorWidth * 0.5 - currentWidth * 0.5, monitorHeight - WINDOW_HEIGHT - 30, true);
 };
