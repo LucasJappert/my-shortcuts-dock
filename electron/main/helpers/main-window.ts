@@ -23,6 +23,7 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
         resizable: true,
         skipTaskbar: true,
         webPreferences: { preload },
+        type: 'utility', // Prueba con 'toolbar', 'utility' o 'splash'
     });
 
     _ReLocateWindow();

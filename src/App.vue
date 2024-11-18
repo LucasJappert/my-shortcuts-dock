@@ -19,11 +19,11 @@ const FirstShortCuts = () => {
     const items: Array<null | IShortCut> = [];
 
     items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/maizplus-ambientaciones-api",
+        folderPath: "/home/lucas/Desktop/my-projects/maizplus_ambientaciones_api",
         classes: ["pulse-yellow"],
         iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
         action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus-ambientaciones-api");
+            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus_ambientaciones_api");
         },
     });
     items.push({
@@ -106,7 +106,7 @@ const SecondShortCuts = () => {
         classes: ["pulse-black"],
         iconPath: new URL("@/assets/icons/youtube-music.jpg", import.meta.url).href,
         action: () => {
-            window.electronAPI.openAppImage("/home/lucas/Desktop/my-youtube-music.AppImage");
+            window.electronAPI.openAppImage("/home/lucas/Desktop/youtube-music-with-overlay.AppImage");
         },
     });
     items.push({
