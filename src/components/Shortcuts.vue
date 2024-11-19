@@ -12,7 +12,7 @@
                 {{ shortcut.title }}
             </link-button> -->
 
-            <div v-if="shortcut == null" class="mx-1">|</div>
+            <div v-if="shortcut == null" class="mx-0">|</div>
         </template>
     </div>
 </template>

@@ -24,6 +24,7 @@ const electronAPI = {
     closeButton: () => ipcRenderer.send('close-button'),
     resizeWindow: () => ipcRenderer.send('resize-window'),
     openAppImage: (filePath: string) => ipcRenderer.send('open-app-image', filePath),
+    openDirectory: (directoryPath: string) => ipcRenderer.send('open-directory', directoryPath),
     // Additional methods can be added here
 };
 

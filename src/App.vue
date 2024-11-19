@@ -19,6 +19,18 @@ const FirstShortCuts = () => {
     const items: Array<null | IShortCut> = [];
 
     items.push({
+        folderPath: "/home/lucas/Desktop/my-projects",
+        classes: ["pulse-black"],
+        iconPath: new URL("@/assets/icons/folder.png", import.meta.url).href,
+        action: () => {
+            window.electronAPI.openDirectory("/home/lucas/Desktop/my-projects");
+        },
+    });
+
+    items.push(null);
+    items.push(null);
+
+    items.push({
         folderPath: "/home/lucas/Desktop/my-projects/maizplus_ambientaciones_api",
         classes: ["pulse-yellow"],
         iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
@@ -59,6 +71,7 @@ const FirstShortCuts = () => {
             window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/agroideas-in-front");
         },
     });
+    items.push(null);
     items.push(null);
     items.push({
         folderPath: "/home/lucas/Desktop/my-projects/my-shortcuts-app",

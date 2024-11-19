@@ -11,6 +11,7 @@ export interface ElectronAPI {
     closeButton: () => void;
     resizeWindow: () => void;
     openAppImage: (filePath: string) => void;
+    openDirectory: (directoryPath: string) => void;
 }
 
 declare global {
