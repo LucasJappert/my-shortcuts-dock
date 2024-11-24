@@ -51,14 +51,14 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .my-button {
-    border-radius: 20px;
+    border-radius: 30px;
     background: rgba(0, 0, 0, 0.8156862745);
     // padding: 5px;
-    height: 30px;
+    height: 50px;
     max-height: 90%;
-    min-width: 30px;
-    max-width: 30px;
-    display: inline-flex;
+    min-width: 50px;
+    max-width: 50px;
+    // display: inline-flex;
     cursor: pointer;
     // animation: pulse 4s infinite linear;
 

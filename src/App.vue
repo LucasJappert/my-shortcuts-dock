@@ -1,18 +1,9 @@
 <script setup lang="ts">
-import { ipcRenderer } from "electron";
 import { IShortCut } from "./components/models/ShortCut.model";
 import Shortcuts from "./components/Shortcuts.vue";
-import whatsappIcon from "@/assets/whatsapp.png";
-import { ref } from "vue";
-
-const expanded = ref(false);
 
 const closeButton = () => {
     window.electronAPI.closeButton();
-};
-const ChangeSizeButton = () => {
-    expanded.value = !expanded.value;
-    window.electronAPI.resizeWindow();
 };
 
 const FirstShortCuts = () => {
@@ -189,12 +180,12 @@ const SecondShortCuts = () => {
 
 <template>
     <div class="shortcuts-container">
-        <Shortcuts :items="FirstShortCuts()" />
-        <Shortcuts :items="SecondShortCuts()" />
+        <Shortcuts :items="[...FirstShortCuts(), ...SecondShortCuts()]" />
+        <!-- <Shortcuts :items="SecondShortCuts()" /> -->
     </div>
 
     <div class="btn-container">
-        <v-btn
+        <!-- <v-btn
             class=""
             density="compact"
             :icon="expanded ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
@@ -202,9 +193,9 @@ const SecondShortCuts = () => {
             @click="ChangeSizeButton()"
         ></v-btn>
 
-        <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn>
+        <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn> -->
 
-        <v-btn class="ml-2" density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
+        <v-btn density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
     </div>
 </template>
 
@@ -212,7 +203,7 @@ const SecondShortCuts = () => {
 #app {
     width: 100%;
     height: 100%;
-    padding: 5px 20px;
+    padding: 5px 40px;
     overflow: hidden;
     // overflow-x: scroll;
     border-radius: 30px;
@@ -225,13 +216,14 @@ const SecondShortCuts = () => {
 <style scoped lang="scss">
 .shortcuts-container {
     background: #000000c0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    align-items: center;
     width: 100%;
+    height: 100%;
     overflow-x: scroll;
-    box-shadow: inset 0 0 5px #ffffff88;
+    box-shadow: inset 0 0 15px #000000, inset 0 0 15px #000000, inset 0 0 15px #000000, 0 0 15px #000000;
     border-radius: 30px;
-    padding: 2px;
+    padding: 2px 10px;
 }
 .btn-container {
     position: relative !important;
@@ -243,13 +235,13 @@ const SecondShortCuts = () => {
     align-items: center;
     justify-content: space-between;
     margin-left: 10px;
-    height: 90%;
+    height: 60%;
     padding: 0 10px;
 }
 .btn {
     font-size: 0.9rem;
     line-height: 2rem;
-    background: #00000090;
+    // background: #00000090;
     // color: var(--white) !important;
     padding: 5px;
     border-radius: 100%;

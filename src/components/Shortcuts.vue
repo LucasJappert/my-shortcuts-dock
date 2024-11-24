@@ -1,20 +1,14 @@
 <template>
-    <div class="my-container">
-        <template v-for="(shortcut, index) in items" :key="index">
-            <my-button v-if="shortcut" :shortCut="shortcut" :classes="shortcut?.classes">
-                <span v-if="shortcut?.title">
-                    {{ shortcut.title }}
-                </span>
-                <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut?.iconPath" :alt="shortcut?.iconPath" />
-            </my-button>
-
-            <!-- <link-button v-if="shortcut?.linkWeb" :link-web="shortcut.linkWeb" :classes="shortcut.classes">
+    <template v-for="(shortcut, index) in items" :key="index">
+        <my-button v-if="shortcut" :shortCut="shortcut" :classes="shortcut?.classes">
+            <span v-if="shortcut?.title">
                 {{ shortcut.title }}
-            </link-button> -->
+            </span>
+            <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut?.iconPath" :alt="shortcut?.iconPath" />
+        </my-button>
 
-            <div v-if="shortcut == null" class="mx-0">|</div>
-        </template>
-    </div>
+        <div v-if="shortcut == null" class="mx-0">|</div>
+    </template>
 </template>
 
 <script lang="ts">
@@ -103,9 +97,9 @@ $size-pulse: 3px;
     @include pulse-animation(steelblue);
 }
 .icon-image {
-    height: 100%;
-    max-height: 100%;
-    max-width: 30px;
+    height: 95%;
+    max-height: 95%;
+    max-width: 100%;
     border-radius: 100%;
 }
 </style>

@@ -1,22 +1,21 @@
 import { BrowserWindow, shell, screen, Menu } from 'electron';
 import path from 'node:path';
 import { VITE_DEV_SERVER_URL } from './paths';
+import { MOUSE } from './mouse';
 
 
-const WINDOW_WIDTH = 400;
-const WINDOW_WIDTH_FULL = 800;
-const WINDOW_HEIGHT = 40;
-const OVERLAY_WIDTH = 2560;
+export const _DockHeight = 70;
+const ALWAYS_VISIBLE = false;
 
 export let MAIN_WINDOW: BrowserWindow | null = null;
 
 export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtml: string) => {
     MAIN_WINDOW = new BrowserWindow({
         title: 'Main window',
+        height: _DockHeight,
+        width: GetDockWidth(),
         icon: path.join(process.env.VITE_PUBLIC, '/shortcuts.png'),
-        width: WINDOW_WIDTH_FULL,
         useContentSize: true,
-        height: WINDOW_HEIGHT,
         frame: false,
         transparent: true,
         alwaysOnTop: true,
@@ -26,7 +25,7 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
         type: 'utility', // Prueba con 'toolbar', 'utility' o 'splash'
     });
 
-    _ReLocateWindow();
+    RelocateWindow(false);
 
     if (VITE_DEV_SERVER_URL) {
         MAIN_WINDOW.loadURL(VITE_DEV_SERVER_URL);
@@ -43,17 +42,87 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
     MAIN_WINDOW.on('closed', () => MAIN_WINDOW = null);
 
     if (!isDev) Menu.setApplicationMenu(null);
+
+    MAIN_WINDOW.hide();
+
+    setInterval(() => CheckMousePosition(), 200);
+};
+
+let WindowVisible = false;
+const showThreshold: number = 5; // Margen en píxeles desde arriba
+const CheckMousePosition = () => {
+
+    if (!MOUSE.position) return;
+
+    const { y } = MOUSE.position;
+
+    const barBounds = GetWindowBounds();
+    if (!barBounds) {
+        console.warn('Bar bounds are invalid. Skipping CheckMousePosition.');
+        return; // Evita errores si los bounds no están disponibles
+    }
+
+    const barTop = barBounds.y;
+    const barBottom = barBounds.y + barBounds.height;
+
+    if (y <= showThreshold && !WindowVisible) return ShowWindow();
+
+    if (WindowVisible && (y > barBottom || y < barTop)) return HideWindow();
+};
+
+const GetDockWidth = () => {
+    const { width: monitorWidth } = screen.getPrimaryDisplay().workAreaSize;
+    return parseInt((monitorWidth * 0.5).toString());
+};
+
+export const GetXPosition = () => {
+    const { width: monitorWidth } = screen.getPrimaryDisplay().workAreaSize;
+    const xPosition = monitorWidth * 0.5 - GetDockWidth() * 0.5;
+
+    return parseInt(xPosition.toString());
+};
+
+export const RelocateWindow = (visible: boolean) => {
+    const yPosition = (visible || ALWAYS_VISIBLE) ? 0 : -_DockHeight;
+    const xPosition = GetXPosition();
+    const newBounds = {
+        x: xPosition,
+        y: yPosition,
+        width: GetDockWidth(),
+        height: _DockHeight
+    };
+
+    MAIN_WINDOW.setBounds(newBounds);
+};
+
+export const HideWindow = () => {
+    if (ALWAYS_VISIBLE || !WindowVisible) return;
+
+    RelocateWindow(false);
+    WindowVisible = false;
+
+    MAIN_WINDOW.hide();
+};
+export const ShowWindow = () => {
+    if (WindowVisible) return;
+
+    RelocateWindow(true);
+    WindowVisible = true;
+
+    MAIN_WINDOW.show();
+};
+export const GetWindowBounds = () => {
+    const bounds = MAIN_WINDOW.getBounds();
+    if (bounds.width <= 0 || bounds.height <= 0) {
+        console.error('Invalid bounds in GetWindowBounds:', bounds);
+        return null;
+    }
+    return bounds;
 };
 
 export const ResizeWindow = () => {
-    const currentWidth = MAIN_WINDOW?.getSize()[0] || WINDOW_WIDTH_FULL;
-    const newWidth = currentWidth >= WINDOW_WIDTH_FULL ? WINDOW_WIDTH : WINDOW_WIDTH_FULL;
-    MAIN_WINDOW?.setSize(newWidth, WINDOW_HEIGHT, true);
-    _ReLocateWindow();
+    if (!MAIN_WINDOW) return;
+    MAIN_WINDOW.setSize(GetDockWidth(), _DockHeight, true);
+    RelocateWindow(true);
 };
 
-const _ReLocateWindow = () => {
-    const currentWidth = MAIN_WINDOW?.getSize()[0] || WINDOW_WIDTH_FULL;
-    const { width: monitorWidth, height: monitorHeight } = screen.getPrimaryDisplay().workAreaSize;
-    MAIN_WINDOW?.setPosition(monitorWidth * 0.5 - currentWidth * 0.5, monitorHeight - WINDOW_HEIGHT - 30, true);
-};
