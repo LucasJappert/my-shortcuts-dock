@@ -50,11 +50,12 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
 
 let WindowVisible = false;
 const showThreshold: number = 5; // Margen en píxeles desde arriba
+
 const CheckMousePosition = () => {
+    const { width: monitorWidth } = screen.getPrimaryDisplay().workAreaSize;
+    const xThresholdRange: Array<number> = [monitorWidth * 0.4, monitorWidth * 0.6];
 
-    if (!MOUSE.position) return;
-
-    const { y } = MOUSE.position;
+    const { x, y } = GetMousePosition();
 
     const barBounds = GetWindowBounds();
     if (!barBounds) {
@@ -65,9 +66,19 @@ const CheckMousePosition = () => {
     const barTop = barBounds.y;
     const barBottom = barBounds.y + barBounds.height;
 
-    if (y <= showThreshold && !WindowVisible) return ShowWindow();
+    const xThresholdValid = x >= xThresholdRange[0] && x <= xThresholdRange[1];
+    if ((y <= showThreshold && xThresholdValid) && !WindowVisible) return ShowWindow();
 
     if (WindowVisible && (y > barBottom || y < barTop)) return HideWindow();
+};
+
+const GetMousePosition = () => {
+    if (!MOUSE.position) return { x: 0, y: 0 };
+    const scaleFactor = screen.getPrimaryDisplay().scaleFactor;
+    return {
+        x: MOUSE.position.x / scaleFactor,
+        y: MOUSE.position.y / scaleFactor
+    };
 };
 
 const GetDockWidth = () => {
