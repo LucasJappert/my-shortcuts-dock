@@ -2,217 +2,51 @@
 import { IShortCut } from "./components/models/ShortCut.model";
 import Shortcuts from "./components/Shortcuts.vue";
 
+const GetJsonData = async () => {
+    // intentamos obtener el json que esta en la carpeta json/my-shortcuts.json
+    const jsonData = await fetch("./json/my-shortcuts.json");
+    return await jsonData.json();
+};
+
 const closeButton = () => {
     window.electronAPI.closeButton();
 };
 
-const FirstShortCuts = () => {
-    const items: Array<null | IShortCut> = [];
-
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects",
-        classes: ["pulse-black"],
-        iconPath: new URL("@/assets/icons/folder.png", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openDirectory("/home/lucas/Desktop/my-projects");
-        },
-    });
-
-    items.push(null);
-    items.push(null);
-
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/maizplus_ambientaciones_api",
-        classes: ["pulse-yellow"],
-        iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus_ambientaciones_api");
-        },
-    });
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/maizplus-api",
-        classes: ["pulse-blue"],
-        iconPath: new URL("@/assets/icons/crop1.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus-api");
-        },
-    });
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/maizplus-front",
-        classes: ["pulse-green"],
-        iconPath: new URL("@/assets/farm.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/maizplus-front");
-        },
-    });
-    items.push(null);
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/agroideas-in-api",
-        classes: ["pulse-blue"],
-        iconPath: new URL("@/assets/agroideas-in.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/agroideas-in-api");
-        },
-    });
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/agroideas-in-front",
-        classes: ["pulse-green"],
-        iconPath: new URL("@/assets/agroideas-in.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/agroideas-in-front");
-        },
-    });
-    items.push(null);
-    items.push(null);
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/my-shortcuts-app",
-        classes: ["pulse-magenta"],
-        iconPath: new URL("@/assets/shortcuts.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/my-shortcuts-app");
-        },
-    });
-    items.push({
-        folderPath: "/home/lucas/Desktop/my-projects/twitch-extensions",
-        classes: ["pulse-purple"],
-        iconPath: new URL("@/assets/twitch.svg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openFolderInVSCode("/home/lucas/Desktop/my-projects/twitch-extensions");
-        },
-    });
-
-    return items;
-};
-
-const SecondShortCuts = () => {
-    const items: Array<null | IShortCut> = [];
-
-    items.push(null);
-    items.push(null);
-
-    items.push({
-        classes: ["pulse-black"],
-        iconPath: new URL("@/assets/notepad.svg", import.meta.url).href,
-        linkWeb: "https://speedy-notes.netlify.app/",
-        action: () => {
-            window.open("https://speedy-notes.netlify.app/", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-black"],
-        iconPath: new URL("@/assets/icons/chatgpt.jpg", import.meta.url).href,
-        linkWeb: "https://chatgpt.com/",
-        action: () => {
-            window.open("https://chatgpt.com/", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-black"],
-        iconPath: new URL("@/assets/icons/youtube-music.jpg", import.meta.url).href,
-        action: () => {
-            window.electronAPI.openAppImage("/home/lucas/Desktop/youtube-music-with-overlay.AppImage");
-        },
-    });
-    items.push({
-        classes: ["pulse-black"],
-        iconPath: new URL("@/assets/whatsapp.png", import.meta.url).href,
-        linkWeb: "https://web.whatsapp.com/",
-        action: () => {
-            window.open("https://web.whatsapp.com/", "_blank");
-        },
-    });
-
-    items.push(null);
-    items.push({
-        classes: ["pulse-red"],
-        iconPath: new URL("@/assets/gmail.svg", import.meta.url).href,
-        linkWeb: "https://mail.google.com/mail/u/0/#inbox",
-        action: () => {
-            window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-white"],
-        iconPath: new URL("@/assets/google-chat.svg", import.meta.url).href,
-        linkWeb: "https://mail.google.com/chat/u/0/#chat/home",
-        action: () => {
-            window.open("https://mail.google.com/chat/u/0/#chat/home", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-steelblue"],
-        iconPath: new URL("@/assets/azure.svg", import.meta.url).href,
-        linkWeb: "https://dev.azure.com/agroideassa/Sistemas/_sprints/backlog/Sistemas Team/Sistemas/Current",
-        action: () => {
-            window.open("https://dev.azure.com/agroideassa/Sistemas/_sprints/backlog/Sistemas Team/Sistemas/Current", "_blank");
-        },
-    });
-
-    items.push(null);
-    items.push({
-        classes: ["pulse-yellow"],
-        iconPath: new URL("@/assets/pull-request.svg", import.meta.url).href,
-        linkWeb: "https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-ambientaciones-api/pullrequests?_a=mine",
-        action: () => {
-            window.open("https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-ambientaciones-api/pullrequests?_a=mine", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-aqua"],
-        iconPath: new URL("@/assets/pull-request.svg", import.meta.url).href,
-        linkWeb: "https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-api/pullrequests?_a=mine",
-        action: () => {
-            window.open("https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-api/pullrequests?_a=mine", "_blank");
-        },
-    });
-    items.push({
-        classes: ["pulse-green"],
-        iconPath: new URL("@/assets/pull-request.svg", import.meta.url).href,
-        linkWeb: "https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-front/pullrequests?_a=mine",
-        action: () => {
-            window.open("https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-front/pullrequests?_a=mine", "_blank");
-        },
-    });
-
-    return items;
-};
+const shortcuts: Array<IShortCut | null> = (await GetJsonData()) as Array<IShortCut | null>;
+console.log(shortcuts);
+const iconsPathNoRepeated = new Set(shortcuts.map((shortcut) => shortcut?.iconPath));
+console.log(iconsPathNoRepeated);
 </script>
 
 <template>
-    <div class="shortcuts-container">
-        <Shortcuts :items="[...FirstShortCuts(), ...SecondShortCuts()]" />
-        <!-- <Shortcuts :items="SecondShortCuts()" /> -->
-    </div>
+    <Suspense>
+        <template #default>
+            <div class="shortcuts-container">
+                <Shortcuts :items="shortcuts" />
+            </div>
 
-    <div class="btn-container">
-        <!-- <v-btn
-            class=""
-            density="compact"
-            :icon="expanded ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
-            size="medium"
-            @click="ChangeSizeButton()"
-        ></v-btn>
+            <div class="btn-container">
+                <!-- <v-btn
+                    class=""
+                    density="compact"
+                    :icon="expanded ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
+                    size="medium"
+                    @click="ChangeSizeButton()"
+                ></v-btn>
 
-        <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn> -->
+                <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn> -->
 
-        <v-btn density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
-    </div>
+                <v-btn density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
+            </div>
+        </template>
+
+        <template #fallback>
+            <div>Cargando...</div>
+        </template>
+    </Suspense>
 </template>
 
-<style lang="scss">
-#app {
-    width: 100%;
-    height: 100%;
-    padding: 5px 40px;
-    overflow: hidden;
-    // overflow-x: scroll;
-    border-radius: 30px;
-    // background: #000000c0;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
-</style>
+<style lang="scss"></style>
 <style scoped lang="scss">
 .shortcuts-container {
     background: #000000c0;

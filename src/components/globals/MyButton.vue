@@ -1,11 +1,12 @@
 <template>
-    <div class="flex-center mx-1 pointer my-button" :class="getClasses" @click="ClickButton()" :title="getTitle">
+    <div class="flex-center mx-1 pointer my-button" :class="getClasses" @click="ClickButton()" :title="shortCut.actionUrl">
         <slot></slot>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { ActionTypes } from "../models/ShortCut.model";
 
 export default defineComponent({
     name: "MyButton", // Asegúrate de dar un nombre al componente
@@ -23,23 +24,25 @@ export default defineComponent({
         getClasses(): string {
             return this.classes.join(" ");
         },
-        getTitle(): string {
-            if (this.shortCut?.folderPath) return this.shortCut.folderPath;
-            if (this.shortCut?.linkWeb) return this.shortCut.linkWeb;
-
-            return "";
-        },
     },
     setup(props) {
         const ClickButton = () => {
             console.log(props.shortCut);
-            if (props.shortCut?.action) return props.shortCut.action();
+            if (props.shortCut.actionType == ActionTypes.openInVSCode) {
+                return window.electronAPI.openFolderInVSCode(props.shortCut.actionUrl);
+            }
 
-            // if (props.folderPath) return window.electronAPI.openFolderInVSCode(props.folderPath);
+            if (props.shortCut.actionType == ActionTypes.openWebLink) {
+                return window.open(props.shortCut.actionUrl, "_blank");
+            }
 
-            // if (props.webLink) return window.open(props.webLink, "_blank");
+            if (props.shortCut.actionType == ActionTypes.openDirectory) {
+                return window.electronAPI.openDirectory(props.shortCut.actionUrl);
+            }
 
-            // return null;
+            if (props.shortCut.actionType == ActionTypes.openApp) {
+                return window.electronAPI.openAppImage(props.shortCut.actionUrl);
+            }
         };
 
         return {

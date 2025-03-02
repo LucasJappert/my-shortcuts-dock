@@ -29,7 +29,7 @@ export const CreateMainWindow = async (isDev: boolean, preload: string, indexHtm
 
     if (VITE_DEV_SERVER_URL) {
         MAIN_WINDOW.loadURL(VITE_DEV_SERVER_URL);
-        // if (isDev) MAIN_WINDOW.webContents.openDevTools();
+        if (isDev) MAIN_WINDOW.webContents.openDevTools();
     } else {
         MAIN_WINDOW.loadFile(indexHtml);
     }
@@ -112,6 +112,7 @@ export const ShowWindow = () => {
     MAIN_WINDOW.show();
 };
 export const GetWindowBounds = () => {
+    if (!MAIN_WINDOW) return null;
     const bounds = MAIN_WINDOW.getBounds();
     if (bounds.width <= 0 || bounds.height <= 0) {
         console.error('Invalid bounds in GetWindowBounds:', bounds);

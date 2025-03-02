@@ -1,9 +1,9 @@
 <template>
     <template v-for="(shortcut, index) in items" :key="index">
         <my-button v-if="shortcut" :shortCut="shortcut" :classes="shortcut?.classes">
-            <span v-if="shortcut?.title">
-                {{ shortcut.title }}
-            </span>
+            <!-- <span v-if="shortcut?.actionUrl">
+                {{ shortcut.actionUrl }}
+            </span> -->
             <img class="icon-image" v-if="shortcut?.iconPath" :src="shortcut?.iconPath" :alt="shortcut?.iconPath" />
         </my-button>
 

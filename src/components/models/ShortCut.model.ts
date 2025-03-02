@@ -1,17 +1,24 @@
+type ActionType = "openDirectory" | "openInVSCode" | "openWebLink" | "openApp" | "";
+
+export const ActionTypes = {
+    openDirectory: "openDirectory",
+    openInVSCode: "openInVSCode",
+    openWebLink: "openWebLink",
+    openApp: "openApp",
+};
+
 export interface IShortCut {
-    folderPath?: string;
     classes: string[];
-    title?: string;
-    linkWeb?: string;
     iconPath?: string;
+    actionType: ActionType;
+    actionUrl: string;
     action?: () => void;
 }
 
 export class ShortCut implements IShortCut {
-    folderPath?: string;
     classes: string[] = [];
-    title?: string = '';
-    linkWeb?: string;
     iconPath?: string;
+    actionType: ActionType = "";
+    actionUrl: string = "";
     action?: () => void;
 }
