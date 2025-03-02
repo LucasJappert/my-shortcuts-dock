@@ -22,7 +22,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc --noEmit && vite build && electron-builder && npm run post-build",
+        "build": "vite build && electron-builder && npm run post-build",
         "post-build": "tsc post-build.ts && mv post-build.js post-build.cjs && node post-build.cjs && rm post-build.cjs",
         "preview": "vite preview"
     },
@@ -40,6 +40,7 @@
     },
     "dependencies": {
         "@mdi/font": "^7.4.47",
+        "uiohook-napi": "^1.5.4",
         "vuetify": "^3.7.3"
     }
 }
