@@ -1,49 +1,34 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 import { IShortCut } from "./components/models/ShortCut.model";
 import Shortcuts from "./components/Shortcuts.vue";
 
+const shortcuts = ref<IShortCut[] | null>(null);
+
 const GetJsonData = async () => {
-    // intentamos obtener el json que esta en la carpeta json/my-shortcuts.json
-    const jsonData = await fetch("./json/my-shortcuts.json");
+    const jsonData = await fetch("/json/my-shortcuts.json");
     return await jsonData.json();
 };
+
+onMounted(async () => {
+    shortcuts.value = await GetJsonData();
+    console.log("shortcuts", shortcuts.value);
+});
 
 const closeButton = () => {
     window.electronAPI.closeButton();
 };
-
-const shortcuts: Array<IShortCut | null> = (await GetJsonData()) as Array<IShortCut | null>;
-console.log(shortcuts);
-const iconsPathNoRepeated = new Set(shortcuts.map((shortcut) => shortcut?.iconPath));
-console.log(iconsPathNoRepeated);
 </script>
 
 <template>
-    <Suspense>
-        <template #default>
-            <div class="shortcuts-container">
-                <Shortcuts :items="shortcuts" />
-            </div>
+    <div v-if="shortcuts" class="shortcuts-container">
+        <Shortcuts :items="shortcuts" />
+    </div>
+    <div v-else>Cargando...</div>
 
-            <div class="btn-container">
-                <!-- <v-btn
-                    class=""
-                    density="compact"
-                    :icon="expanded ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
-                    size="medium"
-                    @click="ChangeSizeButton()"
-                ></v-btn>
-
-                <v-btn class="draggable ml-2" density="compact" icon="mdi-drag" size="small"></v-btn> -->
-
-                <v-btn density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
-            </div>
-        </template>
-
-        <template #fallback>
-            <div>Cargando...</div>
-        </template>
-    </Suspense>
+    <div class="btn-container">
+        <v-btn density="compact" icon="mdi-close" size="small" @click="closeButton"></v-btn>
+    </div>
 </template>
 
 <style lang="scss"></style>

@@ -34,74 +34,6 @@
         "actionUrl": "/home/lucas/Desktop/my-projects/maizplus-front"
     },
     null,
-    {
-        "classes": [
-            "pulse-blue"
-        ],
-        "iconPath": "/assets/agroideas-in.svg",
-        "actionType": "openInVSCode",
-        "actionUrl": "/home/lucas/Desktop/my-projects/agroideas-in-api"
-    },
-    {
-        "classes": [
-            "pulse-green"
-        ],
-        "iconPath": "/assets/agroideas-in.svg",
-        "actionType": "openInVSCode",
-        "actionUrl": "/home/lucas/Desktop/my-projects/agroideas-in-front"
-    },
-    null,
-    null,
-    {
-        "classes": [
-            "pulse-magenta"
-        ],
-        "iconPath": "/assets/shortcuts.svg",
-        "actionType": "openInVSCode",
-        "actionUrl": "/home/lucas/Desktop/my-projects/my-shortcuts-app"
-    },
-    {
-        "classes": [
-            "pulse-purple"
-        ],
-        "iconPath": "/assets/twitch.svg",
-        "actionType": "openInVSCode",
-        "actionUrl": "/home/lucas/Desktop/my-projects/twitch-extensions"
-    },
-    null,
-    null,
-    {
-        "classes": [
-            "pulse-black"
-        ],
-        "iconPath": "/assets/notepad.svg",
-        "actionType": "openWebLink",
-        "actionUrl": "https://speedy-notes.netlify.app/"
-    },
-    {
-        "classes": [
-            "pulse-black"
-        ],
-        "iconPath": "/assets/icons/chatgpt.jpg",
-        "actionType": "openWebLink",
-        "actionUrl": "https://chatgpt.com/"
-    },
-    {
-        "classes": [
-            "pulse-black"
-        ],
-        "iconPath": "/assets/icons/youtube-music.jpg",
-        "actionType": "openApp",
-        "actionUrl": "/home/lucas/Desktop/youtube-music-with-overlay.AppImage"
-    },
-    {
-        "classes": [
-            "pulse-black"
-        ],
-        "iconPath": "/assets/whatsapp.png",
-        "actionType": "openWebLink",
-        "actionUrl": "https://web.whatsapp.com/"
-    },
     null,
     {
         "classes": [
@@ -128,6 +60,7 @@
         "actionUrl": "https://dev.azure.com/agroideassa/Sistemas/_sprints/backlog/Sistemas Team/Sistemas/Current"
     },
     null,
+    null,
     {
         "classes": [
             "pulse-yellow"
@@ -151,5 +84,41 @@
         "iconPath": "/assets/pull-request.svg",
         "actionType": "openWebLink",
         "actionUrl": "https://dev.azure.com/agroideassa/Sistemas/_git/maizplus-front/pullrequests?_a=mine"
+    },
+    null,
+    null,
+    {
+        "classes": [
+            "pulse-magenta"
+        ],
+        "iconPath": "/assets/shortcuts.svg",
+        "actionType": "openInVSCode",
+        "actionUrl": "/home/lucas/Desktop/my-projects/my-shortcuts-app"
+    },
+    {
+        "classes": [
+            "pulse-black"
+        ],
+        "iconPath": "/assets/notepad.svg",
+        "actionType": "openWebLink",
+        "actionUrl": "https://speedy-notes.netlify.app/"
+    },
+    null,
+    null,
+    {
+        "classes": [
+            "pulse-blue"
+        ],
+        "iconPath": "/assets/agroideas-in.svg",
+        "actionType": "openInVSCode",
+        "actionUrl": "/home/lucas/Desktop/my-projects/agroideas-in-api"
+    },
+    {
+        "classes": [
+            "pulse-green"
+        ],
+        "iconPath": "/assets/agroideas-in.svg",
+        "actionType": "openInVSCode",
+        "actionUrl": "/home/lucas/Desktop/my-projects/agroideas-in-front"
     }
 ]
