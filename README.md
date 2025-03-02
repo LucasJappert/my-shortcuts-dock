@@ -7,8 +7,7 @@
 Here’s a preview of how **My Shortcuts App** looks in action:
 
 Current version:
-![New version](public/screenshot2.png)
-![New version](public/screenshot1.png)
+![alt text](image.png)
 
 Old version:
 ![My Shortcuts App](public/screenshot.png)
